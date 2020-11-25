@@ -8,13 +8,13 @@ import ru.terrakok.cicerone.Router
 
 class CurrentUserPresenter(private val router: Router, private val user: GitUser): MvpPresenter<CurrentUserView>(){
 
-
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         viewState.setCurrentUser(user.login)
     }
-    fun  backClick(): Boolean {
-        router.backTo(Screens.UsersScreen())
+
+    fun backClick(): Boolean {
+        router.exit()
         return true
     }
 

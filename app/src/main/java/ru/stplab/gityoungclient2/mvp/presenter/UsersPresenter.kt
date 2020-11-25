@@ -9,7 +9,8 @@ import ru.stplab.gityoungclient2.mvp.view.list.UserItemView
 import ru.stplab.gityoungclient2.navigation.Screens
 import ru.terrakok.cicerone.Router
 
-class UsersPresenter(private val router: Router, private val usersRepo: GitUsersRepo) : MvpPresenter<UsersView>() {
+class UsersPresenter(private val router: Router, private val usersRepo: GitUsersRepo) :
+    MvpPresenter<UsersView>() {
 
     class UsersListPresenter : IUserListPresenter {
         override var itemClickListener: ((UserItemView) -> Unit)? = null
@@ -38,9 +39,12 @@ class UsersPresenter(private val router: Router, private val usersRepo: GitUsers
     }
 
     private fun loadData() {
-        val users = usersRepo.getUsers()
+        val usersRx = usersRepo.getUsers()
         usersListPresenter.users.clear()
-        usersListPresenter.users.addAll(users)
+        usersRx.toList()
+            .subscribe { users ->
+                usersListPresenter.users.addAll(users)
+            }
         viewState.updateList()
     }
 
