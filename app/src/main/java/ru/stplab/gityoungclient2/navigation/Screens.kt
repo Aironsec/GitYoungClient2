@@ -1,7 +1,7 @@
 package ru.stplab.gityoungclient2.navigation
 
 import ru.stplab.gityoungclient2.mvp.model.entity.GitUser
-import ru.stplab.gityoungclient2.ui.fragment.CurrentUserFragment
+import ru.stplab.gityoungclient2.ui.fragment.UserRepositoriesFragment
 import ru.stplab.gityoungclient2.ui.fragment.UsersFragment
 import ru.terrakok.cicerone.android.support.SupportAppScreen
 
@@ -10,7 +10,7 @@ class Screens {
         override fun getFragment() = UsersFragment.newInstance()
     }
 
-    class CurrentUserScreen(private val user: GitUser) : SupportAppScreen() {
-        override fun getFragment() = CurrentUserFragment.newInstance(user)
+    class RepositoriesUserScreen(private val user: GitUser) : SupportAppScreen() {
+        override fun getFragment() = UserRepositoriesFragment.newInstance(user)
     }
 }

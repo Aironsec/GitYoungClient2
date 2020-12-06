@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GitYoungClient2</string>
+    <string name="tv_repo">Репозиторий:</string>
+    <string name="tv_forks">Ветвлений:</string>
 </resources>
