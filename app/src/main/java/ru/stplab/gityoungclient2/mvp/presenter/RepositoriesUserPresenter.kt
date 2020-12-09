@@ -5,7 +5,7 @@ import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
 import ru.stplab.gityoungclient2.mvp.model.entity.GitUser
 import ru.stplab.gityoungclient2.mvp.model.entity.RepositoryUser
-import ru.stplab.gityoungclient2.mvp.model.repo.RetrofitGitUsersRepo
+import ru.stplab.gityoungclient2.mvp.model.repo.IRepositoriesUserRepo
 import ru.stplab.gityoungclient2.mvp.presenter.list.IRepositoryListPresenter
 import ru.stplab.gityoungclient2.mvp.view.RepositoriesUserView
 import ru.stplab.gityoungclient2.mvp.view.list.RepositoryItemView
@@ -13,7 +13,7 @@ import ru.terrakok.cicerone.Router
 
 class RepositoriesUserPresenter(private val router: Router,
                                 private val user: GitUser,
-                                private val retrofitUsersRepo: RetrofitGitUsersRepo,
+                                private val retrofitUsersRepo: IRepositoriesUserRepo,
                                 private val uiScheduler: Scheduler
                                 ): MvpPresenter<RepositoriesUserView>(){
 
@@ -41,7 +41,7 @@ class RepositoriesUserPresenter(private val router: Router,
     }
 
     private fun loadData() {
-        disposableLoadData = retrofitUsersRepo.getRepositories(user.reposUrl)
+        disposableLoadData = retrofitUsersRepo.getRepositories(user)
             .observeOn(uiScheduler)
             .subscribe { repos ->
                 repoUserPresenter.repositories.clear()

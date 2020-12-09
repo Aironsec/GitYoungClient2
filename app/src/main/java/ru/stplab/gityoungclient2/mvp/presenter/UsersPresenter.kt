@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
 import ru.stplab.gityoungclient2.mvp.model.entity.GitUser
+import ru.stplab.gityoungclient2.mvp.model.repo.IGitUsersRepo
 import ru.stplab.gityoungclient2.mvp.model.repo.RetrofitGitUsersRepo
 import ru.stplab.gityoungclient2.mvp.presenter.list.IUserListPresenter
 import ru.stplab.gityoungclient2.mvp.view.UsersView
@@ -12,7 +13,7 @@ import ru.stplab.gityoungclient2.navigation.Screens
 import ru.terrakok.cicerone.Router
 
 class UsersPresenter(private val router: Router,
-                     private val retrofitUsersRepo: RetrofitGitUsersRepo,
+                     private val retrofitUsersRepo: IGitUsersRepo,
                      private val uiScheduler: Scheduler) :
     MvpPresenter<UsersView>() {
 

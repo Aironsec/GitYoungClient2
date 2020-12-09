@@ -11,6 +11,8 @@ import moxy.MvpAppCompatFragment
 import moxy.ktx.moxyPresenter
 import ru.stplab.gityoungclient2.R
 import ru.stplab.gityoungclient2.mvp.model.api.ApiHolder
+import ru.stplab.gityoungclient2.mvp.model.entity.room.db.Database
+import ru.stplab.gityoungclient2.mvp.model.repo.CacheGitUsersRepo
 import ru.stplab.gityoungclient2.mvp.model.repo.RetrofitGitUsersRepo
 import ru.stplab.gityoungclient2.mvp.presenter.UsersPresenter
 import ru.stplab.gityoungclient2.mvp.view.UsersView
@@ -18,6 +20,7 @@ import ru.stplab.gityoungclient2.ui.App
 import ru.stplab.gityoungclient2.ui.BackButtonListener
 import ru.stplab.gityoungclient2.ui.adapter.UsersRvAdapter
 import ru.stplab.gityoungclient2.ui.image.GlideImageLoader
+import ru.stplab.gityoungclient2.ui.network.AndroidNetworkStatus
 
 class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
 
@@ -26,7 +29,7 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
     }
 
     private val presenter by moxyPresenter {
-        UsersPresenter(App.instance.router, RetrofitGitUsersRepo(ApiHolder.api), AndroidSchedulers.mainThread())
+        UsersPresenter(App.instance.router, RetrofitGitUsersRepo(ApiHolder.api, AndroidNetworkStatus(requireContext()), CacheGitUsersRepo(Database.getInstance())), AndroidSchedulers.mainThread())
     }
 
     private val adapter by lazy {
