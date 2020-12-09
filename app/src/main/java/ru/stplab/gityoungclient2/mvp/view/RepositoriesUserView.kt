@@ -4,7 +4,8 @@ import moxy.MvpView
 import moxy.viewstate.strategy.alias.AddToEndSingle
 
 @AddToEndSingle
-interface CurrentUserView: MvpView {
-
-    fun setCurrentUser(user: String)
+interface RepositoriesUserView : MvpView {
+//    fun setCurrentUser(user: String)
+    fun init()
+    fun updateList()
 }
