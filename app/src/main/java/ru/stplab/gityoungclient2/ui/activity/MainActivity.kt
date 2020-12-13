@@ -1,5 +1,6 @@
 package ru.stplab.gityoungclient2.ui.activity
 
+import android.os.Bundle
 import moxy.MvpAppCompatActivity
 import moxy.ktx.moxyPresenter
 import ru.stplab.gityoungclient2.R
@@ -7,15 +8,26 @@ import ru.stplab.gityoungclient2.mvp.presenter.MainPresenter
 import ru.stplab.gityoungclient2.mvp.view.MainView
 import ru.stplab.gityoungclient2.ui.App
 import ru.stplab.gityoungclient2.ui.BackButtonListener
+import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.support.SupportAppNavigator
+import javax.inject.Inject
 
-class MainActivity : MvpAppCompatActivity(R.layout.activity_main), MainView {
+class MainActivity : MvpAppCompatActivity(), MainView {
 
-    private val navigatorHolder = App.instance.navigatorHolder
+    @Inject lateinit var navigatorHolder: NavigatorHolder
+
     private val navigator = SupportAppNavigator(this, supportFragmentManager, R.id.container)
 
     private val presenter by moxyPresenter {
-        MainPresenter(App.instance.router)
+        MainPresenter().apply {
+            App.instance.appComponent.inject(this)
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        App.instance.appComponent.inject(this)
     }
 
     override fun onResumeFragments() {

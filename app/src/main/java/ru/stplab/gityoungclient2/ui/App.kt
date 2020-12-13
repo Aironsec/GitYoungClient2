@@ -1,25 +1,25 @@
 package ru.stplab.gityoungclient2.ui
 
 import android.app.Application
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Router
+import ru.stplab.gityoungclient2.di.AppComponent
+import ru.stplab.gityoungclient2.di.DaggerAppComponent
+import ru.stplab.gityoungclient2.di.modules.AppModule
 
 class App: Application() {
-    private val cicerone: Cicerone<Router> by lazy {
-        Cicerone.create()
-    }
+
     companion object{
         lateinit var instance: App
     }
 
+    lateinit var appComponent: AppComponent
+
     override fun onCreate() {
         super.onCreate()
         instance = this
+
+        appComponent = DaggerAppComponent.builder()
+            .appModule(AppModule(this))
+            .build()
     }
 
-    val router
-        get() = cicerone.router
-
-    val navigatorHolder
-        get() = cicerone.navigatorHolder
 }
