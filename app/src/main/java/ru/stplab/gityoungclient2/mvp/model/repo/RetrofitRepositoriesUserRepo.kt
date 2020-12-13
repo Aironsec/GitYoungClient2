@@ -6,6 +6,7 @@ import ru.stplab.gityoungclient2.mvp.model.api.IDataSource
 import ru.stplab.gityoungclient2.mvp.model.entity.GitUser
 import ru.stplab.gityoungclient2.mvp.model.entity.RepositoryUser
 import ru.stplab.gityoungclient2.mvp.model.network.INetworkState
+import ru.stplab.gityoungclient2.mvp.model.repo.cache.ICacheRepositoriesUserRepo
 
 class RetrofitRepositoriesUserRepo(
     private val api: IDataSource,

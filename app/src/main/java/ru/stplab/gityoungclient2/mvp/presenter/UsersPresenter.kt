@@ -5,17 +5,19 @@ import io.reactivex.rxjava3.disposables.Disposable
 import moxy.MvpPresenter
 import ru.stplab.gityoungclient2.mvp.model.entity.GitUser
 import ru.stplab.gityoungclient2.mvp.model.repo.IGitUsersRepo
-import ru.stplab.gityoungclient2.mvp.model.repo.RetrofitGitUsersRepo
 import ru.stplab.gityoungclient2.mvp.presenter.list.IUserListPresenter
 import ru.stplab.gityoungclient2.mvp.view.UsersView
 import ru.stplab.gityoungclient2.mvp.view.list.UserItemView
 import ru.stplab.gityoungclient2.navigation.Screens
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class UsersPresenter(private val router: Router,
-                     private val retrofitUsersRepo: IGitUsersRepo,
-                     private val uiScheduler: Scheduler) :
-    MvpPresenter<UsersView>() {
+class UsersPresenter : MvpPresenter<UsersView>() {
+
+    @Inject lateinit var retrofitUsersRepo: IGitUsersRepo
+    @Inject lateinit var router: Router
+    @Inject lateinit var uiScheduler: Scheduler
+
 
     class UsersListPresenter : IUserListPresenter {
         override var itemClickListener: ((UserItemView) -> Unit)? = null
@@ -49,10 +51,10 @@ class UsersPresenter(private val router: Router,
         disposableRxUsers = retrofitUsersRepo.getUsers()
             .observeOn(uiScheduler)
             .subscribe { users ->
-            usersListPresenter.users.clear()
-            usersListPresenter.users.addAll(users)
-            viewState.updateList()
-        }
+                usersListPresenter.users.clear()
+                usersListPresenter.users.addAll(users)
+                viewState.updateList()
+            }
     }
 
     fun backClick(): Boolean {

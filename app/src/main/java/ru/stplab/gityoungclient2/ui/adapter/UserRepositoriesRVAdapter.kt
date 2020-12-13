@@ -3,17 +3,12 @@ package ru.stplab.gityoungclient2.ui.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.extensions.LayoutContainer
-import kotlinx.android.synthetic.main.item_user.*
 import kotlinx.android.synthetic.main.item_user_repositories.*
 import ru.stplab.gityoungclient2.R
-import ru.stplab.gityoungclient2.mvp.model.image.IImageLoader
 import ru.stplab.gityoungclient2.mvp.presenter.list.IRepositoryListPresenter
-import ru.stplab.gityoungclient2.mvp.presenter.list.IUserListPresenter
 import ru.stplab.gityoungclient2.mvp.view.list.RepositoryItemView
-import ru.stplab.gityoungclient2.mvp.view.list.UserItemView
 
 class UserRepositoriesRvAdapter(
     private val presenter: IRepositoryListPresenter

@@ -10,12 +10,13 @@ import ru.stplab.gityoungclient2.mvp.presenter.list.IRepositoryListPresenter
 import ru.stplab.gityoungclient2.mvp.view.RepositoriesUserView
 import ru.stplab.gityoungclient2.mvp.view.list.RepositoryItemView
 import ru.terrakok.cicerone.Router
+import javax.inject.Inject
 
-class RepositoriesUserPresenter(private val router: Router,
-                                private val user: GitUser,
-                                private val retrofitUsersRepo: IRepositoriesUserRepo,
-                                private val uiScheduler: Scheduler
-                                ): MvpPresenter<RepositoriesUserView>(){
+class RepositoriesUserPresenter(private val user: GitUser): MvpPresenter<RepositoriesUserView>(){
+
+    @Inject lateinit var retrofitUsersRepo: IRepositoriesUserRepo
+    @Inject lateinit var router: Router
+    @Inject lateinit var uiScheduler: Scheduler
 
     class RepositoriesUserPresenter : IRepositoryListPresenter {
         override var itemClickListener: ((RepositoryItemView) -> Unit)? = null

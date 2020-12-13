@@ -1,4 +1,4 @@
-package ru.stplab.gityoungclient2.mvp.model.repo
+package ru.stplab.gityoungclient2.mvp.model.repo.cache
 
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
